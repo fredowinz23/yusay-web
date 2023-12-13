@@ -1,0 +1,46 @@
+.nav-link {
+  margin-right: 20px;
+  /*align-items: center;*/
+}
+
+.btn {
+  background-color: var(--bs-primary);
+  color: var(--bs-body-bg);
+}
+
+footer {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+footer, .volunteer-heading a:link {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  width: 100%;
+}
+
+.copyright-column {
+  text-decoration: none;
+}
+
+.home-heading {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+@media (min-width: 1400px) {
+  .mission-statement {
+    margin-left: -100px;
+    margin-right: -100px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .vision-statement {
+    font-size: 30px;
+  }
+}
+
