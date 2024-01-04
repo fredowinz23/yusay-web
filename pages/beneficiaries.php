@@ -40,8 +40,8 @@ if ($status=="Denied") {
   <tr>
     <th>#</th>
     <th>Name</th>
-    <th>Description</th>
-    <th>Action</th>
+    <th>Tell us about your situation</th>
+    <th width="300px">Action</th>
   </tr>
 
 <?php
@@ -58,8 +58,16 @@ if ($status=="Denied") {
       <div class="action-btn">
         <a href="beneficiary-detail.php?Id=<?=$row->Id;?>" class="btn btn-info btn-sm">View</a>
         <?php if ($role=="Admin"): ?>
-          <a href="process.php?action=change-beneficiary-status&status=Approved&Id=<?=$row->Id?>" class="btn btn-primary btn-sm">Approve</a>
-          <a href="process.php?action=change-beneficiary-status&status=Denied&Id=<?=$row->Id?>" class="btn btn-danger btn-sm">Deny</a>
+          <?php if ($row->status=='Pending'): ?>
+            <a href="process.php?action=change-beneficiary-status&status=Approved&Id=<?=$row->Id?>" class="btn btn-primary btn-sm">Approve</a>
+
+            <a href="process.php?action=change-beneficiary-status&status=Denied&Id=<?=$row->Id?>" class="btn btn-danger btn-sm">Deny</a>
+          <?php endif; ?>
+
+            <?php if ($row->status=='Approved' || $row->status=='Denied'): ?>
+              <a href="process.php?action=change-beneficiary-status&status=Pending&Id=<?=$row->Id?>" class="btn btn-warning btn-sm">Reset</a>
+            <?php endif; ?>
+
         <?php endif; ?>
       </div>
     </td>

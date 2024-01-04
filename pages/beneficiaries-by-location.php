@@ -2,50 +2,58 @@
 $ROOT_DIR="../";
 include $ROOT_DIR . "templates/header.php";
 
-$Id = get_query_string("Id", 0);
-$program = program()->get("Id=$Id");
-
-$joiner_list = joiner()->list("programId=$Id");
+$type = get_query_string("type", "City");
+$refId = get_query_string("refId", "");
+$address_list = address()->list("type='$type'");
+if ($refId) {
+  $address_list = address()->list("type='$type' and refId=$refId");
+}
 
 ?>
 <center>
-<h2>Joiners</h2>
+<h2>Beneficiaries by Location</h2>
 </center>
-<b>Program:</b> <?=$program->title?> <br>
+<br><br>
 
-<b>Address:</b> <?=$program->address?> <br>
-
-<b>Date/Time:</b> <?=$program->date?> / <?=$program->time?>
-<br>
-<br>
-<br>
 
 <table class="table">
   <tr>
     <th>#</th>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>Email</th>
+    <th><?=$type?></th>
+    <th>Total Beneficiaries</th>
+    <th width="400">Action</th>
   </tr>
 
 <?php
   $count = 0;
- foreach ($joiner_list as $row):
-   $user = account()->get("Id=$row->userId");
-   $vol = volunteer()->get("Id=$user->volunteerId");
-   $city = address()->get("Id=$vol->cityId and type='City'");
-   $brgy = address()->get("Id=$vol->brgyId and type='Barangay'");
-   $countJoiners = joiner()->count("programId=$row->Id");
+ foreach ($address_list as $row):
+   if ($type=="City") {
+     $totalBenificiaries = beneficiary()->count("cityId=$row->Id");
+   }
+   if ($type=="Barangay") {
+     $totalBenificiaries = beneficiary()->count("brgyId=$row->Id");
+   }
    $count +=1;
     ?>
   <tr class="item-items">
     <td class="item-data"
     ><?=$count;?></td>
-    <td><?=$vol->firstName;?> <?=$vol->lastName;?></td>
-    <td><?=$vol->address;?>, <?=$city->name;?>, <?=$brgy->name;?>, <?=$vol->postalCode;?></td>
-    <td><?=$vol->mobileNumber;?></td>
-    <td><?=$vol->email;?></td>
+    <td><?=$row->name;?></td>
+    <td><?=$totalBenificiaries;?></td>
+    <td>
+      <div class="action-btn">
+          <div class="action-btn">
+            <a href="beneficiary-list-by-location.php?type=<?=$type?>&refId=<?=$row->Id?>" class="btn btn-info">
+              View Beneficiaries
+            </a>
+            <?php if ($type=="City"): ?>
+            <a href="beneficiaries-by-location.php?type=Barangay&refId=<?=$row->Id?>" class="btn btn-info">
+              View Barangay
+            </a>
+          <?php endif; ?>
+          </div>
+      </div>
+    </td>
   </tr>
 
 <?php endforeach; ?>

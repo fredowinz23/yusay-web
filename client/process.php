@@ -170,18 +170,9 @@ function program_save(){
 function beneficiary_submit(){
 	#save records to database
 	$model = beneficiary();
-	$model->obj["firstName"] = $_POST["firstName"];
-	$model->obj["lastName"] = $_POST["lastName"];
-	$model->obj["email"] = $_POST["email"];
-	$model->obj["age"] = $_POST["age"];
-	$model->obj["gender"] = $_POST["gender"];
-	$model->obj["contactNumber"] = $_POST["contactNumber"];
-	$model->obj["address"] = $_POST["address"];
-	$model->obj["barangay"] = $_POST["barangay"];
-	$model->obj["city"] = $_POST["city"];
-	$model->obj["content"] = $_POST["content"];
-	$model->obj["status"] = "Pending";
-	$model->obj["proof"] = uploadFile($_FILES["image"]);
+	$model->obj = $_POST;
+	$image_file_name = uploadFile($_FILES["image"]);
+	$model->obj["proof"] = $image_file_name;
 	$model->obj["dateAdded"] = "NOW()";
 	$model->create();
 
@@ -192,21 +183,9 @@ function beneficiary_submit(){
 function donation_submit(){
 	#save records to database
 	$model = donation();
-	$model->obj["firstName"] = $_POST["firstName"];
-	$model->obj["lastName"] = $_POST["lastName"];
-	$model->obj["email"] = $_POST["email"];
-	$model->obj["age"] = $_POST["age"];
-	$model->obj["gender"] = $_POST["gender"];
-	$model->obj["contactNumber"] = $_POST["contactNumber"];
-	$model->obj["address"] = $_POST["address"];
-	$model->obj["barangay"] = $_POST["barangay"];
-	$model->obj["city"] = $_POST["city"];
-	$model->obj["content"] = $_POST["content"];
-	$model->obj["status"] = "Pending";
-	$model->obj["proof"] = uploadFile($_FILES["image"]);
-	$model->obj["isAnonymous"] = $_POST["isAnonymous"];
-	$model->obj["amount"] = $_POST["amount"];
-	$model->obj["referenceNumber"] = $_POST["referenceNumber"];
+	$model->obj = $_POST;
+	$image_file_name = uploadFile($_FILES["image"]);
+	$model->obj["proof"] = $image_file_name;
 	$model->obj["dateAdded"] = "NOW()";
 	$model->create();
 

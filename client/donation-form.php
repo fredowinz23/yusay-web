@@ -9,10 +9,50 @@ $address_list = address()->list("type='City'");
 
 <div class="container">
   <center>
-  <h1>Donation Form</h1>
+
 </center>
   <div class="card">
     <div class="card-body">
+      <center>
+  <h1>Donation Form</h1>
+      </center>
+
+      <div style="margin:30px">
+
+      <p>
+        Important Notice: Donations Page Purpose
+      </p>
+      <p>
+
+
+The donations page on our website is intended ONLY for the submission of donation forms and verification documentation. It is NOT a payment processing page.
+</p>
+<p>
+
+If you would like to make a donation to the Felix G. Yusay Foundation, please follow these steps:
+Fill out the online donation form completely with your personal details and donation amount.
+Make your monetary contribution through your chosen method – we accept bank transfers, checks, or payments through third party processors.
+Retain documentation by taking a picture showing your name, the date, amount, and any reference numbers.
+Upload your completed donation form and image proof of donation by clicking the “SUBMIT” button
+
+</p>
+<p>
+An administrator will verify your submitted donation details before sending confirmation. Once verified, we will send you a confirmation and tax receipt.
+</p>
+<p>
+
+This donations page allows us to match forms to payments for accurate verification. It is not directly linked to any payment portals or financial accounts. Please utilize your preferred payment method externally first, then provide documentation here.
+
+</p>
+<p>
+We deeply appreciate every donation which allows us to further the Felix G. Yusay Foundation's mission. Please ensure you follow these steps so we can verify and acknowledge your generous gift. If you have any questions, contact us at
+
+
+
+      </p>
+
+
+      </div>
 
       <form action="process.php?action=donation-submit" method="post" enctype="multipart/form-data">
 

@@ -2,6 +2,21 @@
   $ROOT_DIR="../";
   include $ROOT_DIR . "templates/header.php";
 
+  $dateFrom = get_query_string("dateFrom","2023-01-01");
+  $dateTo = get_query_string("dateTo", date("Y-m-d"));
+
+  $pendingDonationList = donation()->list("status='Pending' and (dateAdded>='$dateFrom' and dateAdded<='$dateTo')");
+  $approvedDonationList = donation()->list("status='Approved' and (dateAdded>='$dateFrom' and dateAdded<='$dateTo')");
+
+  $totalPendingDonations = 0;
+  $totalApprovedDonations = 0;
+  foreach ($pendingDonationList as $row) {
+    $totalPendingDonations += $row->amount;
+  }
+  foreach ($approvedDonationList as $row) {
+    $totalApprovedDonations += $row->amount;
+  }
+
   $donation_list = donation()->list("status='Approved'");
   $totalCashRecieved = 0;
   foreach ($donation_list as $row) {
@@ -53,7 +68,29 @@
 <h2>Yusay Hub Dashboard</h2>
 </center>
 
+<div class="card">
+  <div class="card-body">
 
+<b>Donations by range</b>
+<form action="index.php" method="get" style="width:600px;">
+  <div class="input-group">
+    <input  type="date" name="dateFrom" value="<?=$dateFrom;?>" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <input  type="date" name="dateTo" value="<?=$dateTo;?>" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="submit" class="btn btn-info" data-mdb-ripple-init>Filter</button>
+  </div>
+</form>
+
+<div class="row">
+    <div class="col-12">
+      <div>
+        <canvas id="donationChart"></canvas>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+<hr>
 <div class="row">
   <div class="col-4">
     <div>
@@ -61,7 +98,7 @@
     </div>
   </div>
 
-    <div class="col">
+    <div class="col-8">
       <div>
         <canvas id="myChart2"></canvas>
       </div>
@@ -101,6 +138,36 @@
   });
 
 
+    const donationChart = document.getElementById('donationChart');
+
+    new Chart(donationChart, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Approved Donations (Php <?=format_money($totalApprovedDonations);?>)',
+          'Pending Donations (Php <?=format_money($totalPendingDonations)?>)',
+        ],
+        datasets: [{
+          label: 'Donations',
+          data: [
+            <?=$totalApprovedDonations;?>, <?=$totalPendingDonations?>
+          ],
+       backgroundColor: ["#64B5F6", "#f54293", "#2196F3", "#FFC107", "#1976D2", "#FFA000", "#0D47A1"],
+       hoverBackgroundColor: ["#B2EBF2", "#f54293", "#4DD0E1", "#FF8A65", "#00BCD4", "#FF5722", "#0097A7"],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
 
     const ctx2 = document.getElementById('myChart2');
 
@@ -119,6 +186,8 @@
                 <?=total_spent_per_category($row->Id);?>,
             <?php endforeach; ?>
           ],
+       backgroundColor: ["#64B5F6", "#FFD54F", "#2196F3", "#FFC107", "#1976D2", "#FFA000", "#0D47A1"],
+       hoverBackgroundColor: ["#B2EBF2", "#FFCCBC", "#4DD0E1", "#FF8A65", "#00BCD4", "#FF5722", "#0097A7"],
           borderWidth: 1
         }]
       },

@@ -4,6 +4,8 @@ include $ROOT_DIR . "templates/header.php";
 
 $Id = $_GET["Id"];
 $benef = beneficiary()->get("Id=$Id");
+$city = address()->get("Id=$benef->cityId and type='City'");
+$brgy = address()->get("Id=$benef->brgyId and type='Barangay'");
 
 ?>
 
@@ -52,20 +54,21 @@ $benef = beneficiary()->get("Id=$Id");
                 <b>Address:</b>
                 <input type="text"  value="<?=$benef->address;?>" class="form-control" disabled>
               </div>
-              <div class="col-6">
-                <b>Barangay:</b>
-                <input type="text"  value="<?=$benef->barangay;?>" class="form-control" disabled>
-              </div>
-              <div class="col-6">
-                <b>City/Municipality:</b>
-                <input type="text"  value="<?=$benef->city;?>" class="form-control" disabled>
-              </div>
+              <div class="col-4">
+              <b>City:</b>
+              <input type="text" name="city" class="form-control" value="<?=$city->name;?>" disabled>
+            </div>
+            <div class="col-4">
+              <b>Barangay:</b>
+              <input type="text" name="barangay" class="form-control" value="<?=$brgy->name;?>" disabled>
+            </div>
               <div class="col-12">
                 <b>Tell us about your situation:</b>
                 <textarea name="content" id="c-content" class="form-control" disabled><?=$benef->content;?></textarea>
               </div>
               <div class="col-12">
                 <b>Proof:</b> <br>
+                <?=$benef->proof?>
                 <a href="../media/<?=$benef->proof?>" target="_blank">Click to view proof</a>
               </div>
             </div>

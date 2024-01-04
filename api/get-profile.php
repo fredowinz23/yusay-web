@@ -6,7 +6,8 @@ $json = array();
 $success = true;
 $username = $_POST["username"];
 $user = account()->get("username='$username'");
-$item = user_interface($user);
+$vol = volunteer()->get("Id=$user->volunteerId");
+$item = volunteer_interface($vol);
 
 
 $json["username"] = $_POST["username"];

@@ -16,6 +16,24 @@ $address_list = address()->list("type='City'");
         <h1>Volunteer Form</h1>
       </center>
 
+<div style="margin:20px">
+  <p>
+  Volunteer Application Instructions
+</p><p>
+Thank you for your interest in volunteering with the Felix G. Yusay Foundation! Please follow these steps to apply:
+</p><p>
+Fill out the volunteer application form completely and accurately. Double check that all contact information and details submitted are correct.
+Submit your application. The foundation will contact you via phone or email within 5 business days to notify you on the status of your application.
+If accepted as a volunteer, you will receive a confirmation email with next steps to prepare for volunteering. This may include signing waiver forms, reviewing codes of conduct and dress codes, and getting details on training schedules. Please follow any guidance provided by the foundation to get ready for your volunteer role.
+Attend any required virtual or in-person volunteer orientation sessions. The foundation will inform you if an orientation is mandatory and provide dates and access details. Orientation sessions give important information to get you ready to volunteer effectively.
+</p><p>
+PS: Once approved, volunteers are required to have the official Felix G. Yusay Foundation mobile app installed on their smartphones. Upcoming events and volunteer opportunities will be viewable in the app. Volunteers can join events and track hours through the mobile application.
+</p><p>
+We are grateful for volunteers like you who dedicate time to advance our foundation's mission. We aim to make the application process straightforward, and provide you with support each step of the way.
+</p>
+
+</div>
+
       <form action="process.php?action=volunteer-submit" method="post" enctype="multipart/form-data">
 
         <div class="modal-body">

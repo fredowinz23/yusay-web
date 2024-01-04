@@ -161,7 +161,7 @@ if ($status=="Denied") {
               <a href="process.php?action=change-donation-status&status=Approved&Id=<?=$row->Id?>" class="btn btn-primary btn-sm">Approve</a>
               <a href="process.php?action=change-donation-status&status=Denied&Id=<?=$row->Id?>" class="btn btn-danger btn-sm">Deny</a>
           <?php else: ?>
-            <a href="process.php?action=change-donation-status&status=Pending&Id=<?=$row->Id?>" class="btn btn-warning btn-sm">Change</a>
+            <a href="process.php?action=change-donation-status&status=Pending&Id=<?=$row->Id?>" class="btn btn-warning btn-sm">Reset</a>
           <?php endif; ?>
         <?php endif; ?>
       </div>

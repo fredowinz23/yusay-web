@@ -3,6 +3,8 @@ $ROOT_DIR="../";
 include $ROOT_DIR . "templates/header.php";
 
 $catId = $_GET["catId"];
+
+$dateNow = date("Y-m-d");
 $status = get_query_string("status", "Pending");
 $program_list = program()->list("categoryId=$catId and status='$status'");
 
@@ -125,6 +127,7 @@ if ($status=="cActive") {
 <table class="table">
   <tr>
     <th>#</th>
+    <th>Date</th>
     <th>Title</th>
     <th>Description</th>
     <th>Action</th>
@@ -138,6 +141,7 @@ if ($status=="cActive") {
   <tr class="item-items">
     <td class="item-data"
     ><?=$count;?></td>
+    <td><?=$row->date;?></td>
     <td><?=$row->title;?></td>
     <td><?=char_limit($row->description, 100);?></td>
     <td>
@@ -151,43 +155,57 @@ if ($status=="cActive") {
 
 </table>
 
+<?php include $ROOT_DIR . "templates/footer.php"; ?>
 
-      <?php include $ROOT_DIR . "templates/footer.php"; ?>
+<script type="text/javascript">
+var cDate = document.getElementById("c-date");
 
+function validateDate(){
+  var ToDate = new Date();
+  if (new Date(cDate.value).getTime() <= ToDate.getTime()) {
+      alert("Please select future dates");
+      cDate.setCustomValidity("Please select future dates");
+   }
+   else{
+     cDate.setCustomValidity('');
+   }
+}
 
-      <script type="text/javascript">
-      $(function () {
+cDate.onchange = validateDate;
+cDate.onkeyup = validateDate;
 
-          $("#btn-add-item").on("click", function (event) {
+$(function () {
 
-            $("#exampleModal #btn-add").show();
-            $("#exampleModal #btn-edit").hide();
-            $("#exampleModal").modal("show");
-          });
+    $("#btn-add-item").on("click", function (event) {
 
-          function editContact() {
-            $(".edit").on("click", function (event) {
+      $("#exampleModal #btn-add").show();
+      $("#exampleModal #btn-edit").hide();
+      $("#exampleModal").modal("show");
+    });
 
-              $("#exampleModal #btn-add").hide();
-              $("#exampleModal #btn-edit").show();
+    function editContact() {
+      $(".edit").on("click", function (event) {
 
-              var getParentItem = $(this).parents(".item-items");
-              var getModal = $("#exampleModal");
+        $("#exampleModal #btn-add").hide();
+        $("#exampleModal #btn-edit").show();
 
-              // Get List Item Fields
-              var $_name = getParentItem.find(".item-data");
+        var getParentItem = $(this).parents(".item-items");
+        var getModal = $("#exampleModal");
 
-              // Set Modal Field's Value
-              getModal.find("#c-id").val($_name.attr("data-id"));
-              getModal.find("#c-name").val($_name.attr("data-name"));
-              getModal.find("#c-description").html($_name.attr("data-description"));
+        // Get List Item Fields
+        var $_name = getParentItem.find(".item-data");
 
-              $("#exampleModal").modal("show");
-            });
-          }
+        // Set Modal Field's Value
+        getModal.find("#c-id").val($_name.attr("data-id"));
+        getModal.find("#c-name").val($_name.attr("data-name"));
+        getModal.find("#c-description").html($_name.attr("data-description"));
 
-          editContact();
+        $("#exampleModal").modal("show");
+      });
+    }
 
-        });
+    editContact();
 
-      </script>
+  });
+
+</script>

@@ -75,7 +75,6 @@ $category_list = category()->list("isDeleted=0");
     <td> <b><?=$row->name;?></b> <br>
       <i><?=nl2br($row->description);?></i>
     </td>
-    <td></td>
     <td>
       <div class="action-btn">
           <ul class="list-group">

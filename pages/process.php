@@ -323,8 +323,11 @@ function change_beneficiary_status(){
 	if ($status=="Approved") {
 		$statusMessage = "You have successfully approved this record";
 	}
-	else{
-		$statusMessage = "You have successfully denied this record";
+	if ($status=="Denied") {
+		$statusMessage = "You have successfully denied this program";
+	}
+	if ($status=="Pending") {
+		$statusMessage = "You have successfully reset this program";
 	}
 
 	header('Location: beneficiaries.php?success=' . $statusMessage);
@@ -343,8 +346,11 @@ function change_program_status(){
 	if ($status=="Approved") {
 		$statusMessage = "You have successfully approved this program";
 	}
-	else{
+	if ($status=="Denied") {
 		$statusMessage = "You have successfully denied this program";
+	}
+	if ($status=="Closed") {
+		$statusMessage = "You have successfully closed this program";
 	}
 
 	header('Location: program-detail.php?Id='.$Id.'&success=' . $statusMessage);
@@ -388,8 +394,11 @@ function change_donation_status(){
 	if ($status=="Approved") {
 		$statusMessage = "You have successfully approved this record";
 	}
-	else{
+	if ($status=="Denied") {
 		$statusMessage = "You have successfully denied this record";
+	}
+	if ($status=="Pending") {
+		$statusMessage = "You have successfully reset this record";
 	}
 
 	header('Location: donations.php?success=' . $statusMessage);

@@ -4,7 +4,7 @@
 
   $role = get_query_string("role", "Admin");
   $account_list = account()->list("role='$role'");
-  $volunteer_list = volunteer()->list();
+  $volunteer_list = volunteer()->list("status='Approved'");
 
   $adminActive = "";
   $staffActive = "";
@@ -66,10 +66,10 @@
 
         <!-- Modal -->
         <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header d-flex align-items-center">
-                <h5 class="modal-title"><?=$role;?></h5>
+                <h5 class="modal-title"><?=$role;?> Form</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -101,7 +101,7 @@
 
                     <div class="row">
 
-                      <div class="col-md-4">
+                      <div class="col-md-12">
                         <div class="mb-3 contact-name">
                           <input type="hidden" name="Id" id="c-id"/>
                           <input type="hidden" name="role" value="<?=$role;?>"/>
@@ -109,24 +109,23 @@
                           <span class="validation-text text-danger"></span>
                         </div>
                       </div>
-                      <div class="col-md-4 col-password">
+                      <div class="col-md-12 col-password">
                         <div class="mb-3 contact-name">
                           <input type="text" id="c-display-password" class="form-control" placeholder="Password" disabled/>
                           <input type="hidden" name="password" id="c-password" class="form-control" placeholder="Password" required/>
                           <span class="validation-text text-danger"></span>
                         </div>
                       </div>
-                      <div class="col-md-4 col-password" id="reset-password">
-
-                        <a href="" id="reset-password-link" class="btn btn-warning">Reset Password</a>
+                      <div class="col-md-12 col-password mb-3" id="reset-password">
+                        <a href="" id="reset-password-link" class="btn btn-warning" style="margin:10px">Reset Password</a>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="mb-3 contact-name">
                           <input type="text" name="firstName" id="c-firstname" class="form-control" placeholder="First Name" required/>
                           <span class="validation-text text-danger"></span>
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="mb-3 contact-name">
                           <input type="text" name="lastName" id="c-lastname" class="form-control" placeholder="Last Name" required/>
                           <span class="validation-text text-danger"></span>
@@ -137,9 +136,9 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button name="form-type" value="add" id="btn-add" class="btn btn-success rounded-pill px-4">Add</button>
+                <button name="form-type" value="add" id="btn-add" class="btn btn-success rounded-pill px-4">Create</button>
                 <button name="form-type" value="edit" id="btn-edit" class="btn btn-success rounded-pill px-4">Save</button>
-                <button type="button" class="btn btn-danger rounded-pill px-4"  data-dismiss="modal" aria-label="Close"> Discard </button>
+                <button type="button" class="btn btn-secondary rounded-pill px-4"  data-dismiss="modal" aria-label="Close"> Close </button>
               </div>
             </form>
             </div>

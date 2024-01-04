@@ -66,7 +66,10 @@ else{
             </li>
           <?php endif; ?>
           <li>
-            <a href="beneficiaries.php"><span class="fa fa-sticky-note"></span> Beneficiaries</a>
+            <a href="beneficiaries.php"><span class="fa fa-sticky-note"></span> Beneficiary Requests</a>
+          </li>
+          <li>
+            <a href="beneficiaries-by-location.php"><span class="fa fa-sticky-note"></span> Beneficiaries By Location</a>
           </li>
           <li>
             <a href="categories.php"><span class="fa fa-cogs"></span> Program Requests</a>

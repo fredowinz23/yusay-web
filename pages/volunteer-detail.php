@@ -4,7 +4,8 @@ include $ROOT_DIR . "templates/header.php";
 
 $Id = $_GET["Id"];
 $vol = volunteer()->get("Id=$Id");
-
+$city = address()->get("Id=$vol->cityId and type='City'");
+$brgy = address()->get("Id=$vol->brgyId and type='Barangay'");
 ?>
 
 <div class="container">
@@ -33,12 +34,11 @@ $vol = volunteer()->get("Id=$Id");
             </div>
             <div class="col-4">
               <b>City:</b>
-              <input type="text" name="city" class="form-control" value="<?=$vol->address;?>" disabled>
+              <input type="text" name="city" class="form-control" value="<?=$city->name;?>" disabled>
             </div>
-
             <div class="col-4">
-              <b>Province:</b>
-              <input type="text" name="province" class="form-control" value="<?=$vol->province;?>" disabled>
+              <b>Barangay:</b>
+              <input type="text" name="barangay" class="form-control" value="<?=$brgy->name;?>" disabled>
             </div>
             <div class="col-4">
               <b>Postal Code:</b>

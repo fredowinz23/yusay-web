@@ -8,9 +8,14 @@ if (isset($_POST["username"])) {
   $username = $_POST["username"];
   $programId = $_POST["programId"];
   $user = account()->get("username='$username'");
+  $program = program()->get("Id=$programId");
+  $currentVolunteer = joiner()->count("programId=$programId");
   $checkJoinExist = joiner()->count("userId=$user->Id and programId=$programId");
   if ($checkJoinExist > 0) {
     $response = "alreadyJoined";
+  }
+  else if($currentVolunteer>=$program->maxVolunteer){
+    $response = "reachedMaxVolunteer";
   }
   else{
     $model = joiner();

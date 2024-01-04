@@ -12,7 +12,7 @@ function program_interface($row){
 
   $category = category()->get("Id=$row->categoryId");
   $categoryObj = category_interface($category);
-  $totalJoiner = joiner()->count("Id=$row->Id");
+  $totalJoiner = joiner()->count("programId=$row->Id");
 
   $item = array();
   $item["id"] = $row->Id;
@@ -52,6 +52,17 @@ function user_interface($row){
   $item["email"] = $row->email;
   return $item;
 }
+
+function volunteer_interface($row){
+  $item = array();
+  $item["id"] = $row->Id;
+  $item["firstName"] = $row->firstName;
+  $item["lastName"] = $row->lastName;
+  $item["phone"] = $row->mobileNumber;
+  $item["email"] = $row->email;
+  return $item;
+}
+
 
 
 ?>

@@ -22,7 +22,7 @@ function total_spent_per_category($categoryId){
           <h2 data-aos="fade-up">FELIX G. YUSAY FOUNDATION</h2>
           <p data-aos="fade-up" data-aos-delay="100">The Felix G. Yusay Foundation Inc. is a non-stock, non-profit, and non-government organization in Bacolod City that aims to serve and enhance the quality of life of the poor and the needy through its various programs and projects.</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#book-a-table" class="btn-book-a-table">Read more about us</a>
+            <!-- <a href="#book-a-table" class="btn-book-a-table">Read more about us</a> -->
             <a href="https://www.youtube.com/watch?v=pfq_YzlmgNA" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
@@ -128,7 +128,7 @@ function total_spent_per_category($categoryId){
                   <a href="<?=$ROOT_DIR;?>media/<?=$row->image;?>" class="glightbox"><img src="<?=$ROOT_DIR;?>media/<?=$row->image;?>" class="menu-img img-fluid" alt=""></a>
                   <h4><?=$row->title?></h4>
                   <p class="ingredients">
-                    <?=$row->description?>
+                    <?=nl2br($row->description)?>
                   </p>
                 </div><!-- Menu Item -->
 
